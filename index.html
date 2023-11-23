@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">  
+<head> 
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script type="text/babel">
+        
+        let title = 'Циклы'
+               
+        function App() {
+
+            let [text, setText] = React.useState('')
+            let [game, setGame] = React.useState('')
+            let [warThunder, setWarThunder] = React.useState(['Kirill','Niki'])
+            let [genshin, setGenshin] = React.useState(['Ruslan','Igor'])
+            let [csgo, setCsgo] = React.useState(['Kira',])
+            
+                
+
+            
+
+            const addPlayer =(event) => {
+                event.preventDefault();
+                
+                for(let key in warThunder) {
+
+                    if (warThunder[key] == text) {
+                        alert('Такой игрок уже есть')
+                        warThunder.splice(key,1)
+                    }
+
+                }
+
+                for(let key in genshin) {
+                    if (genshin[key] == text) {
+                        alert('Такой игрок уже есть')
+                        genshin.splice(key,1)
+                    }else{
+                        ""
+                    }
+                }
+
+                for(let key in csgo) {
+                    if (csgo[key] == text) {
+                        alert('Такой игрок уже есть')
+                        csgo.splice(key,1)
+                    }else{
+                        ""
+                    }
+                }
+                
+               if (text.length > 2 && game == 'WarThunder' ) {
+                     setWarThunder([...warThunder, text])
+                }else {
+                    ""
+                }
+                 if (text.length > 2 && game == 'Genshin') {
+                    setGenshin([...genshin, text])  
+
+                }
+                 if (text.length > 2 && game == 'Cs:go') {
+                    setCsgo([...csgo, text]) 
+                }
+               
+
+
+
+
+            setText('')
+            setGame('')
+        }
+            
+            
+            
+            return (
+                <div className="wrapper">
+                    <form onSubmit={(event) => addPlayer(event) }>
+                        <input
+                            placeholder= 'Введите имя' 
+                            type="text"
+                            value={text}
+                            onChange={(event) => setText(event.target.value)}
+                        />
+                    <select value={game} onChange={(event) => setGame(event.target.value)}>
+                        <option>Выберите игру</option>
+                        <option>WarThunder</option>    
+                        <option>Genshin</option>    
+                        <option>Cs:go</option>    
+                    </select>
+
+                    <button>Добавить</button>
+                        
+                        
+                    </form>
+                    <ul className="list">
+                       <div className="item">
+                        <h1>WarThunder</h1>
+
+                        {warThunder.map((el) => (
+                            <li key={el}>{el}</li>
+                        ))}
+                        </div>
+                       <div className="item">
+                        <h1>Genshin</h1>
+                        {genshin.map((el) => (
+                            <li key={el}>{el}</li>
+                        ))}
+                        </div>
+                       <div className="item">
+                        <h1>Cs:go</h1>
+                        {csgo.map((el) => (
+                            <li key={el}>{el}</li>
+                        ))}
+                        </div>
+                    </ul>
+
+                    </div>
+            )
+
+
+        }
+          
+        const container = document.getElementById('root')
+        const root = ReactDOM.createRoot(container)
+        root.render(<App/>)
+        
+    </script>
+</body>
+</html>
